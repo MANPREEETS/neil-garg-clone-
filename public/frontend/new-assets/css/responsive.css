@@ -1,0 +1,18 @@
+@media (max-width:650px) {
+    .header .sticky-wrapper .header-middle.sticky-header .topbar .container {
+        .row {
+            flex-wrap: wrap;
+
+            .top-aside {
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media (max-width:885px) {
+    .carousel-caption.d-md-block {
+        max-width: 500px;
+    }
+}
