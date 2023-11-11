@@ -1,32 +1,3 @@
-<div class=" mt-5">
-    @include('frontend.layouts.notification')
-
-    <div class="d-flex" style="background-color: #E7E7E7">
-        <div class="d-none d-md-flex justify-content-start">
-            <img src="{{ asset('frontend/img/rectangle-left.png') }}" alt="">
-        </div>
-        <div class="col-12 col-lg-8 py-5">
-            <form action="{{ route('newsletter') }}" method="post">
-                @csrf
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h2 style="color:#324257">Subscribe to our Newsletter</h2>
-                    <span>Get all the latest information on events, sales, and offers</span>
-                    <div class="row justify-content-center mt-2" style="height: 42px; width: 100%">
-                        <input required class="newsletter-inputbox col-8" type="text" placeholder="Email Address" name="email" >
-                        <button class="newsletter-subButton col-4">SUBSCRIBE</button>
-                    </div>
-                        @error('email')
-                            <span class="text-danger">{{$message}}</span>
-                        @enderror
-                </div>
-            </form>
-        </div>
-        <div class="d-none d-md-flex justify-content-end">
-            <img src="{{ asset('frontend/img/rectangle-right.png') }}" alt="">
-        </div>
-    </div>
-</div>
-
 @php
 $settings = DB::table('settings')->get();
 @endphp
@@ -61,6 +32,7 @@ $settings = DB::table('settings')->get();
                                 </li>
                             @endforeach
                             <li style="color: #fff"><a href="{{ route('contact') }}">Contact Us</a></li>
+                            <li>Home</li>
                         </ul>
                     </div>
                     <!-- End .widget -->
@@ -75,20 +47,26 @@ $settings = DB::table('settings')->get();
                                 <img class="mr-3" src="{{ asset('frontend/img/svg/map-pin.svg') }}" alt="">
                                 <a href="#" target="_blank">{{ $settings[0]->address }}</span>
                             </li>
-                            <li style="color: #fff" class="d-flex align-items-center">
+
+                            <div class="contact-details">
                                 <img class="mr-3" src="{{ asset('frontend/img/svg/phone.svg') }}" alt="">
-                                <?php
-                                // echo $settings[0]->phone; die;
-                                ?>
-                                    @if(strpos($settings[0]->phone, ',') !== false)
-                                        @php
-                                            $phones = explode(',', $settings[0]->phone);
-                                        @endphp
-                                        <a href="tel:+91 {{ $phones[0] }}">+91 {{ $phones[0] }}</a>,
-                                        <a href="tel:+91 {{ $phones[1] }}">+91 {{ $phones[1] }}</a>
-                                    @else
-                                    <a href="tel:+91 {{ $settings[0]->phone }}">+91 {{ $settings[0]->phone }}</a>
-                                    @endif
+
+                                <li style="color: #fff" class="d-flex align-items-center">
+                                    <?php
+                                    // echo $settings[0]->phone; die;
+                                    ?>
+                                        @if(strpos($settings[0]->phone, ',') !== false)
+                                            @php
+                                                $phones = explode(',', $settings[0]->phone);
+                                            @endphp
+                                            <a href="tel:+91 {{ $phones[0] }}">+91 {{ $phones[0] }}</a>
+                                            <a href="tel:+91 {{ $phones[1] }}">+91 {{ $phones[1] }}</a>
+                                        @else
+                                        <a href="tel:+91 {{ $settings[0]->phone }}">+91 {{ $settings[0]->phone }}</a>
+                                        @endif
+                                </li>
+                            </div>
+
                             <li style="color: #fff" class="d-flex align-items-center">
                                 <img class="mr-3" src="{{ asset('frontend/img/svg/mail.svg') }}" alt="">
                                 <a href="mailto:{{ $settings[0]->email }}">{{ $settings[0]->email }}</a>

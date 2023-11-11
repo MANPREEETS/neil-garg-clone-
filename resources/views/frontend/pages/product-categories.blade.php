@@ -27,8 +27,8 @@
         </nav>
 
         <form action="{{ route('product-cat', ['slug' => request()->segment(2)]) }}" method="get" id="filtersForm">
-        <div class="row">
-            <div class="col-lg-9 main-content">
+        <div class="row" id="sorted-products">
+            <div class="col-lg-12 main-content">
                 <nav class="toolbox sticky-header" data-sticky-options="{'mobile': true}">
                     <div class="toolbox-left">
                         <a href="#" class="sidebar-toggle">
@@ -118,7 +118,9 @@
                             <div class="product-default">
                                 <figure>
                                     <a href="{{ route('product-detail' , ['slug' => $product->slug]) }}">
-                                        @if (strpos($product->photo, ','))
+                                        <div class="overlay">
+                                            <p style="height: 100%; min-height:100px; opacity:0;">&nbsp;</p>
+                                            @if (strpos($product->photo, ','))
                                             <?php
                                                 $photos = explode(',',$product->photo);
                                             ?>
@@ -131,6 +133,7 @@
 
                                         {{-- <img src="{{ asset() }}" width="280" height="280" alt="product" />
                                         <img src="assets/images/products/product-1-2.jpg" width="280" height="280" alt="product" /> --}}
+                                        </div>
                                     </a>
 
                                     {{-- <div class="label-group">
@@ -285,70 +288,18 @@
                     @endif
                 </nav>
             </div>
-            <!-- End .col-lg-9 -->
+            <!-- End .col-lg-12 -->
+            <div class="collapse show" id="widget-body-2">
+                <div class="widget-body">
+                    <ul class="cat-list">
+                        @foreach ($allCategoriesWithCount as $cat)
+                            <li class="cat {{ request()->segment(2) == $cat->slug ? 'active' : '' }}" ><a class="cat-link" href="{{ route('product-cat', ['slug' => $cat->slug]) }}">{{ $cat->title }}</a></li>
+                        @endforeach
 
-            <div class="sidebar-overlay"></div>
-            <aside class="sidebar-shop col-lg-3 order-lg-first mobile-sidebar">
-                <div class="sidebar-wrapper">
-                    <div class="widget">
-                        <h3 class="widget-title">
-                            <a data-toggle="collapse" href="#widget-body-2" role="button" aria-expanded="true" aria-controls="widget-body-2">Categories</a>
-                        </h3>
-
-                        <div class="collapse show" id="widget-body-2">
-                            <div class="widget-body">
-                                <ul class="cat-list">
-                                    @foreach ($allCategoriesWithCount as $cat)
-                                        <li class="{{ request()->segment(2) == $cat->slug ? 'active' : '' }}" ><a href="{{ route('product-cat', ['slug' => $cat->slug]) }}">{{ $cat->title }}<span class="products-count">({{ $cat->active_products_in_category_count }})</span></a></li>
-                                    @endforeach
-
-                                </ul>
-                            </div>
-                            <!-- End .widget-body -->
-                        </div>
-                        <!-- End .collapse -->
-                    </div>
-                    <!-- End .widget -->
-
-                    <div class="widget">
-                        <h3 class="widget-title">
-                            <a data-toggle="collapse" href="#widget-body-3" role="button" aria-expanded="true" aria-controls="widget-body-3">Price</a>
-                        </h3>
-
-                        <div class="collapse show" id="widget-body-3">
-                            <div class="widget-body pb-0">
-
-
-                                    <div class="price-slider-wrapper">
-                                        <div id="price-slider"></div>
-                                        <!-- End #price-slider -->
-                                    </div>
-                                    <!-- End .price-slider-wrapper -->
-
-                                    <div class="filter-price-action d-flex align-items-center justify-content-between flex-wrap">
-                                        <div class="filter-price-text">
-                                            Price:
-                                            <span id="filter-price-range"></span>
-                                        </div>
-                                        <!-- End .filter-price-text -->
-                                        <input type="hidden" name="minPrice" id="minPrice" value="0">
-                                        <input type="hidden" name="maxPrice" id="maxPrice" value="10000">
-
-                                        <button type="submit" class="btn btn-primary">Filter</button>
-                                    </div>
-                                    <!-- End .filter-price-action -->
-
-                            </div>
-                            <!-- End .widget-body -->
-                        </div>
-
-                        <!-- End .collapse -->
-                    </div>
-                    <!-- End .widget -->
-
+                    </ul>
                 </div>
-                <!-- End .sidebar-wrapper -->
-            </aside>
+                <!-- End .widget-body -->
+            </div>
             <!-- End .col-lg-3 -->
         </div>
 

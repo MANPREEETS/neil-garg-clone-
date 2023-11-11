@@ -1,3 +1,8 @@
+:root {
+    --red: red;
+    --blue: #1863AB;
+}
+
 /* STICKY HEADER */
 .header-middle {
     flex-direction: column;
@@ -126,7 +131,7 @@
 /* Content */
 .wide-sm.center h1 {
     font-size: 2.25em;
-    color: #1863AB;
+    color: var(--blue);
     font-family: "Poppins", sans-serif;
     line-height: 1.25;
     font-weight: 600;
@@ -141,5 +146,105 @@
     font-family: "Poppins", sans-serif;
     line-height: 1.25;
     font-weight: 600;
-    color: #1863ab;
+    color: var(--blue);
+}
+
+/* Testimonials */
+.container.p-5.mt-5.testimony-margin {
+    margin: 5rem auto !important;
+}
+
+.ls-n-10.text-center.text-uppercase.m-b-4.testimony-heading {
+    text-transform: uppercase;
+    color: var(--blue) !important;
+    font-weight: 600 !important;
+    font-size: 1.875em !important;
+}
+
+.client-testimony {
+    padding: 30px 0px;
+    font-family: "Roboto", sans-serif;
+    color: #6e7889;
+    font-size: 16px;
+    line-height: 1.75;
+    font-weight: 400;
+}
+
+.client-name {
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 15px;
+    margin-bottom: 5px !important;
+}
+
+/* CTA */
+.cta-sameline {
+    width: 100%;
+}
+
+/* Footer */
+.footer {
+    background: #232323 !important;
+}
+
+.contact-details {
+    display: flex;
+    align-items: center;
+
+    .d-flex {
+        flex-direction: column;
+    }
+
+    a {
+        display: inline !important;
+    }
+}
+
+/* ------Product-Category------ */
+.toolbox.sticky-header.fixed {
+    display: none;
+}
+
+.toolbox.sticky-header {
+    display: none;
+}
+
+#sorted-products {
+    flex-direction: column-reverse;
+}
+
+.cat-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 10px;
+
+    :last-child {
+        margin-bottom: auto !important;
+    }
+}
+
+.cat-list li.cat {
+    text-align: center;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ececec;
+
+    >a {
+        color: var(--blue);
+        font-weight: bold;
+    }
+}
+
+.cat-list li.active {
+    background-color: var(--blue);
+
+    >a {
+        color: #fff !important;
+    }
+}
+
+.product-category {
+    width: 27%;
 }

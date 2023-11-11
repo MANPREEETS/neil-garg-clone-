@@ -257,46 +257,6 @@
 	</div>
 	<!-- End Section -->
 
-    <section class="testimonial-section mt-8">
-        <div class="container text-center">
-            <h2 style="color: #324257">Brands</h2>
-        </div>
-        <div class="testimonial-bg"
-            data-image-src="https://img.freepik.com/free-photo/grunge-paint-background_1409-1337.jpg">
-            <div class="container">
-                <div class="owl-carousel owl-theme owl-dots-simple mb-4 mb-lg-0 appear-animate"
-                    data-owl-options="{
-                            'loop': true,
-                            'autoplay': true,
-                            'dots': true,
-                            'margin': 20,
-                            'autoplayTimeout':2000,
-                            'responsive': {
-                                '768': {
-                                    'items': 3
-                                },
-                                '992': {
-                                    'items': 4
-                                }
-                            }
-                        }"
-                    data-animation-name="fadeInRightShorter" data-animation-delay="200">
-
-                    @foreach ($brands as $brand)
-                        <div class="testimonial testimonial-type1 blockquote-both inner-blockquote owner-center">
-                            <div class="testimonial-owner">
-                                <div>
-                                    <img src="{{ asset($brand->photo) }}" width="250" alt="client" style="width: 180px;">
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-
-                </div>
-            </div>
-        </div>
-    </section>
-
     {{-- <div class="container p-5 mt-5">
                     <h2 style="color: #324257" class="ls-n-10 text-center text-uppercase m-b-4">Offers and Deals</h2>
 
@@ -344,64 +304,11 @@
 
                     </div>
                 </div> --}}
-        @if (count($featured)>0)
-        <div style="background-color: #E7E7E7;">
-            <div class="container p-5 mt-5">
-                <h2 style="color: #324257" class="ls-n-10 text-center text-uppercase m-b-3">Featured Products
-                </h2>
+    
 
-                <div class="row justify-content-center flex-wrap">
-                    @foreach ($featured as $key => $product)
-                        <div class="col-sm-3 product-default inner-quickview inner-icon">
-                            <figure>
-                                <a href="{{ route('product-detail', ['slug' => $product->slug]) }}">
-                                    @php
-                                        $photo = explode(',', $product->photo);
-                                    @endphp
-                                    <img class="default-img" src="{{ $photo[0] }}" alt="{{ $photo[0] }}">
-                                    @if (count($photo) > 1)
-                                        <img class="hover-img" src="{{ $photo[1] }}" alt="{{ $photo[1] }}">
-                                    @endif
-                                </a>
-                                {{-- <div class="btn-icon-group">
-                                                <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                                        class="icon-shopping-cart"></i></a>
-                                            </div> --}}
-                                {{-- <a href="/" class="btn-quickview" title="Quick View">Quick
-                                                View</a> --}}
-                            </figure>
-                            <div class="product-details">
-                                <div class="category-wrap">
-                                    <div class="category-list">
-                                        <a href="#" class="product-category">{{ $product->cat_info->title ?? '' }}</a>
-                                    </div>
-                                </div>
-                                <h3 class="product-title">
-                                    <a
-                                        href="{{ route('product-detail', ['slug' => $product->slug]) }}">{{ $product->title }}</a>
-                                </h3>
-                                <div class="ratings-container">
-                                    <div class="product-ratings">
-                                        <span class="ratings" style="width:100%"></span>
-                                        <span class="tooltiptext tooltip-top"></span>
-                                    </div>
-                                </div>
-                                <div class="price-box">
-                                    <span class="product-price">&#8377; {{ $product->price }}</span>
-                                </div>
-                            </div>
-                            <a href="{{ route('contact', ['info' => $product->slug, 'product' =>  $product->title]) }}" class="sendQueryBtn btn">Send Query <img class="arrowIcon" width="20px"
-                                    src="{{ asset('frontend/img/svg/arrow-up-right.svg') }}" alt=""></a>
-                        </div>
-                    @endforeach
-
-                </div>
-            </div>
-        </div>
-        @endif
-
-    <div class="container p-5 mt-5">
-        <h2 style="color: #324257" class="ls-n-10 text-center text-uppercase m-b-4">TESTIMONIALS</h2>
+<section>
+    <div class="container p-5 mt-5 testimony-margin">
+        <h2 style="color: #324257" class="ls-n-10 text-center text-uppercase m-b-4 testimony-heading">What Our Client Says</h2>
 
         <div id="carouselExampleControls" class="carousel slide mt-2" data-ride="carousel">
             <div class="carousel-inner">
@@ -409,11 +316,9 @@
                 @foreach ($testimonials as $testimonial)
                     <div class="carousel-item {{ $loop->first ? ' active' : '' }}">
                         <div class="bg-white d-flex flex-column align-items-center">
-                            <img src="{{ asset($testimonial->photo) }}" alt="testimonial" width="100" height="100"
-                                class="rounded-circle">
                             <div class="d-flex flex-column align-items-center" style="color: #324257; width: 700px">
-                                <h5>{{ $testimonial->name }}</h5>
-                                <p class="text-center">{{ $testimonial->description }}</p>
+                                <p class="text-center client-testimony ">{{ $testimonial->description }}</p>
+                                <h5 class="client-name">{{ $testimonial->name }}</h5>
                             </div>
                         </div>
                     </div>
@@ -447,6 +352,33 @@
             </a>
         </div>
     </div>
+</section>
+
+    <!-- Call Action -->
+	<div class="call-action bg-primary">
+		<div class="cta-block">
+			<div class="container">
+				<div class="content row">
+
+					<div class="cta-sameline">
+                        <div class="cta-banner">
+                            <div class="cta-text">
+                                <h3>Looking an Adequate Solution for your Company?</h3>
+                                <p>Contact us today for free conslutaion or more information.</p>
+                            </div>
+
+                            <div class="cta-button">
+                                <a class="btn btn-outline" href="get-a-quote.html">Get In Touch</a>
+                            </div>
+                        </div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Section -->
 
 
 
